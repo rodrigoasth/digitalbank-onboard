@@ -1,0 +1,324 @@
+{
+	"info": {
+		"_postman_id": "67a978db-24b0-46a6-9b5f-82114ae21c46",
+		"name": "Onboard",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "1262295-67a978db-24b0-46a6-9b5f-82114ae21c46"
+	},
+	"item": [
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "List",
+					"id": "afc4a280-8ef4-4483-bc26-72f0c23b9321",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/onboard/customers",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"onboard",
+								"customers"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "91dd9dd2-6534-4cde-85f5-dfb08e26cf6c",
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/onboard/customers",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"onboard",
+										"customers"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"name": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "[\r\n    {\r\n    \"FirstName\": {{$randomFirstName}},\r\n    \"LastName\": {{$randomLastName}},\r\n    \"DateOfBirth\": {{$randomDatePast}},\r\n    \"Email\": {{$randomEmail}},\r\n    \"PhoneNumber\": {{$randomPhoneNumber}},\r\n    \"Address\": {{$randomStreetAddress}},\r\n    \"City\": {{$randomCity}},\r\n    \"State\": \"NY\",\r\n    \"ZIPCode\": \"25950-000\",\r\n    \"Country\": {{$randomCountry}}\r\n    },\r\n    {\r\n    \"FirstName\": {{$randomFirstName}},\r\n    \"LastName\": {{$randomLastName}},\r\n    \"DateOfBirth\": {{$randomDatePast}},\r\n    \"Email\": {{$randomEmail}},\r\n    \"PhoneNumber\": {{$randomPhoneNumber}},\r\n    \"Address\": {{$randomStreetAddress}},\r\n    \"City\": {{$randomCity}},\r\n    \"State\": \"NY\",\r\n    \"ZIPCode\": \"25950-000\",\r\n    \"Country\": {{$randomCountry}}\r\n    }\r\n\r\n]"
+						}
+					]
+				},
+				{
+					"name": "Specific",
+					"id": "79692113-66c5-4c27-9bd8-6176bfbedc51",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/onboard/customers/b512b0b4-2832-42b8-bd81-769c3fd9d2bc",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"onboard",
+								"customers",
+								"b512b0b4-2832-42b8-bd81-769c3fd9d2bc"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "b843e442-387c-45bf-9f5a-9c392473dc20",
+							"name": "202",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/onboard/customers/b512b0b4-2832-42b8-bd81-769c3fd9d2bc",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"onboard",
+										"customers",
+										"b512b0b4-2832-42b8-bd81-769c3fd9d2bc"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"name": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "    {\r\n    \"FirstName\": {{$randomFirstName}},\r\n    \"LastName\": {{$randomLastName}},\r\n    \"DateOfBirth\": {{$randomDatePast}},\r\n    \"Email\": {{$randomEmail}},\r\n    \"PhoneNumber\": {{$randomPhoneNumber}},\r\n    \"Address\": {{$randomStreetAddress}},\r\n    \"City\": {{$randomCity}},\r\n    \"State\": \"NY\",\r\n    \"ZIPCode\": \"25950-000\",\r\n    \"Country\": {{$randomCountry}}\r\n    }"
+						}
+					]
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "6e9ce3a4-4947-431d-9deb-6f134733e4a4",
+								"exec": [
+									"var uuid = require('uuid');\r",
+									"pm.globals.set(\"CustomerID\", uuid.v4);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "90f7ea54-82f9-4797-9d9b-c429d525e1d5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"FirstName\": \"{{$randomFirstName}}\",\r\n    \"LastName\": \"{{$randomLastName}}\",\r\n    \"DateOfBirth\": \"{{$randomDatePast}}\",\r\n    \"Email\": \"{{$randomEmail}}\",\r\n    \"PhoneNumber\": \"{{$randomPhoneNumber}}\",\r\n    \"Address\": \"{{$randomStreetAddress}}\",\r\n    \"City\": \"{{$randomCity}}\",\r\n    \"State\": \"NY\",\r\n    \"ZIPCode\": \"25950-000\",\r\n    \"Country\": \"{{$randomCountry}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/onboard/customers",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"onboard",
+								"customers"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "bab9ade9-1276-446b-8569-37c858001be4",
+							"name": "201 Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"FirstName\": {{$randomFirstName}},\r\n    \"LastName\": {{$randomLastName}},\r\n    \"DateOfBirth\": {{$randomDatePast}},\r\n    \"Email\": {{$randomEmail}},\r\n    \"PhoneNumber\": {{$randomPhoneNumber}},\r\n    \"Address\": {{$randomStreetAddress}},\r\n    \"City\": {{$randomCity}},\r\n    \"State\": \"NY\",\r\n    \"ZIPCode\": \"25950-000\",\r\n    \"Country\": {{$randomCountry}}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/onboard/customers",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"onboard",
+										"customers"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"name": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Location",
+									"value": "{{url}}/onboard/customers/{{$guid}}",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"FirstName\": \"{{$body 'FirstName'}}\",\r\n    \"LastName\": \"{{$body 'LastName'}}\",\r\n    \"DateOfBirth\": \"{{$body 'DateOfBirth'}}\",\r\n    \"Email\": \"{{$body 'Email'}}\",\r\n    \"PhoneNumber\": \"{{$body 'PhoneNumber'}}\",\r\n    \"Address\": \"{{$body 'Address'}}\",\r\n    \"City\": \"{{$body 'City'}}\",\r\n    \"State\": \"{{$body 'State'}}\",\r\n    \"ZIPCode\": \"{{$body 'ZIPCode'}}\",\r\n    \"Country\": \"{{$body 'Country'}}\",\r\n    \"CustomerID\": \"{{$guid}}\"\r\n}"
+						}
+					]
+				},
+				{
+					"name": "Update",
+					"id": "f860e873-7460-49a2-bd26-5efdc833c9f0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Address\":\"Rua das Orquideas, 10, Prata\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/onboard/customers/{{$guid}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"onboard",
+								"customers",
+								"{{$guid}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "9fc47d80-e908-45a0-8ea0-c48e4273b8fa",
+							"name": "204 Updated",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Address\":\"Rua das Orquideas, 10, Prata\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/onboard/customers/{{$guid}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"onboard",
+										"customers",
+										"{{$guid}}"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "Text",
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			],
+			"id": "92fc1288-b2ad-4161-b2f4-eda903d2efb0"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "2f0a25f4-ee8f-4fa5-b501-3489087c1f22",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "35f9d609-488a-4ef8-b3a9-8d625d204888",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "78914e49-5501-45f7-aef4-4081e2170b96",
+			"key": "url",
+			"value": "https://1df171ae-1ebc-4f2a-a7d4-a211fa09e18c.mock.pstmn.io",
+			"type": "string"
+		}
+	]
+}
