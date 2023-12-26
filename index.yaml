@@ -1,0 +1,165 @@
+openapi: 3.0.0
+info:
+  title: DigitalBank - Onboard API
+  version: 1.0.0
+paths:
+  /onboard/customers:
+    get:
+      summary: Lista de Clientes
+      responses:
+        '200':
+          description: Uma lista de clientes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+    post:
+      summary: Cria um Cliente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        '201':
+          description: Cliente criado
+
+  /onboard/customers/{customerId}:
+    get:
+      summary: Busca um Cliente Específico
+      parameters:
+        - name: customerId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Detalhes do cliente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+
+    patch:
+      summary: Atualiza um Cliente
+      parameters:
+        - name: customerId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Address:
+                  type: string
+      responses:
+        '204':
+          description: Cliente atualizado
+
+  /onboard/accounts:
+    post:
+      summary: Cria uma Conta
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Account'
+      responses:
+        '201':
+          description: Conta criada
+
+  /onboard/accounts/{accountId}:
+    get:
+      summary: Busca uma Conta Específica
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Detalhes da conta
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+
+    patch:
+      summary: Atualiza uma Conta
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                AccountStatus:
+                  type: string
+      responses:
+        '204':
+          description: Conta atualizada
+
+components:
+  schemas:
+    Customer:
+      type: object
+      properties:
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        DateOfBirth:
+          type: string
+          format: date
+        Email:
+          type: string
+          format: email
+        PhoneNumber:
+          type: string
+        Address:
+          type: string
+        City:
+          type: string
+        State:
+          type: string
+        ZIPCode:
+          type: string
+        Country:
+          type: string
+
+    Account:
+      type: object
+      properties:
+        CustomerID:
+          type: string
+        AgencyNumber:
+          type: string
+        AccountType:
+          type: string
+        CurrentBalance:
+          type: number
+        DateOpened:
+          type: string
+          format: date
+        DateClosed:
+          type: string
+          format: date
+        AccountStatus:
+          type: string

@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "3e2b9ccb-8223-4571-83c4-2e60346fcb4f",
 		"name": "Onboard",
+		"description": "Reune apis relacionados a novos clientes e contas",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_uid": "1262295-3e2b9ccb-8223-4571-83c4-2e60346fcb4f"
 	},
@@ -37,9 +38,13 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/onboard/customers",
+									"raw": "https://1df171ae-1ebc-4f2a-a7d4-a211fa09e18c.mock.pstmn.io/onboard/customers",
+									"protocol": "https",
 									"host": [
-										"{{url}}"
+										"1df171ae-1ebc-4f2a-a7d4-a211fa09e18c",
+										"mock",
+										"pstmn",
+										"io"
 									],
 									"path": [
 										"onboard",
@@ -60,7 +65,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "[\r\n    {\r\n    \"FirstName\": {{$randomFirstName}},\r\n    \"LastName\": {{$randomLastName}},\r\n    \"DateOfBirth\": {{$randomDatePast}},\r\n    \"Email\": {{$randomEmail}},\r\n    \"PhoneNumber\": {{$randomPhoneNumber}},\r\n    \"Address\": {{$randomStreetAddress}},\r\n    \"City\": {{$randomCity}},\r\n    \"State\": \"NY\",\r\n    \"ZIPCode\": \"25950-000\",\r\n    \"Country\": {{$randomCountry}}\r\n    },\r\n    {\r\n    \"FirstName\": {{$randomFirstName}},\r\n    \"LastName\": {{$randomLastName}},\r\n    \"DateOfBirth\": {{$randomDatePast}},\r\n    \"Email\": {{$randomEmail}},\r\n    \"PhoneNumber\": {{$randomPhoneNumber}},\r\n    \"Address\": {{$randomStreetAddress}},\r\n    \"City\": {{$randomCity}},\r\n    \"State\": \"NY\",\r\n    \"ZIPCode\": \"25950-000\",\r\n    \"Country\": {{$randomCountry}}\r\n    }\r\n\r\n]"
+							"body": "[\r\n    {\r\n        \"FirstName\": \"{{$randomFirstName}}\",\r\n        \"LastName\": \"{{$randomLastName}}\",\r\n        \"DateOfBirth\": \"{{$randomDatePast}}\",\r\n        \"Email\": \"{{$randomEmail}}\",\r\n        \"PhoneNumber\": \"{{$randomPhoneNumber}}\",\r\n        \"Address\": \"{{$randomStreetAddress}}\",\r\n        \"City\": \"{{$randomCity}}\",\r\n        \"State\": \"NY\",\r\n        \"ZIPCode\": \"25950-001\",\r\n        \"Country\": \"{{$randomCountry}}\"\r\n    },\r\n    {\r\n        \"FirstName\": \"{{$randomFirstName}}\",\r\n        \"LastName\": \"{{$randomLastName}}\",\r\n        \"DateOfBirth\": \"{{$randomDatePast}}\",\r\n        \"Email\": \"{{$randomEmail}}\",\r\n        \"PhoneNumber\": \"{{$randomPhoneNumber}}\",\r\n        \"Address\": \"{{$randomStreetAddress}}\",\r\n        \"City\": \"{{$randomCity}}\",\r\n        \"State\": \"NY\",\r\n        \"ZIPCode\": \"25950-001\",\r\n        \"Country\": \"{{$randomCountry}}\"\r\n    }\r\n]"
 						}
 					]
 				},
@@ -74,38 +79,54 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/onboard/customers/b512b0b4-2832-42b8-bd81-769c3fd9d2bc",
+							"raw": "{{url}}/onboard/customers/:customerId",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"onboard",
 								"customers",
-								"b512b0b4-2832-42b8-bd81-769c3fd9d2bc"
+								":customerId"
+							],
+							"variable": [
+								{
+									"key": "customerId",
+									"value": "b512b0b4-2832-42b8-bd81-769c3fd9d2bc"
+								}
 							]
 						}
 					},
 					"response": [
 						{
 							"id": "bda6dc48-1749-41d0-8325-1d631fcb15f8",
-							"name": "202",
+							"name": "200 OK",
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/onboard/customers/b512b0b4-2832-42b8-bd81-769c3fd9d2bc",
+									"raw": "https://1df171ae-1ebc-4f2a-a7d4-a211fa09e18c.mock.pstmn.io/onboard/customers/:customerId",
+									"protocol": "https",
 									"host": [
-										"{{url}}"
+										"1df171ae-1ebc-4f2a-a7d4-a211fa09e18c",
+										"mock",
+										"pstmn",
+										"io"
 									],
 									"path": [
 										"onboard",
 										"customers",
-										"b512b0b4-2832-42b8-bd81-769c3fd9d2bc"
+										":customerId"
+									],
+									"variable": [
+										{
+											"key": "customerId",
+											"value": "b512b0b4-2832-42b8-bd81-769c3fd9d2bc"
+										}
 									]
 								}
 							},
-							"status": "Accepted",
-							"code": 202,
+							"status": "OK",
+							"code": 200,
 							"_postman_previewlanguage": "json",
 							"header": [
 								{
@@ -117,7 +138,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "    {\r\n    \"FirstName\": {{$randomFirstName}},\r\n    \"LastName\": {{$randomLastName}},\r\n    \"DateOfBirth\": {{$randomDatePast}},\r\n    \"Email\": {{$randomEmail}},\r\n    \"PhoneNumber\": {{$randomPhoneNumber}},\r\n    \"Address\": {{$randomStreetAddress}},\r\n    \"City\": {{$randomCity}},\r\n    \"State\": \"NY\",\r\n    \"ZIPCode\": \"25950-000\",\r\n    \"Country\": {{$randomCountry}}\r\n    }"
+							"body": "\r\n    {\r\n        \"FirstName\": \"{{$randomFirstName}}\",\r\n        \"LastName\": \"{{$randomLastName}}\",\r\n        \"DateOfBirth\": \"{{$randomDatePast}}\",\r\n        \"Email\": \"{{$randomEmail}}\",\r\n        \"PhoneNumber\": \"{{$randomPhoneNumber}}\",\r\n        \"Address\": \"{{$randomStreetAddress}}\",\r\n        \"City\": \"{{$randomCity}}\",\r\n        \"State\": \"NY\",\r\n        \"ZIPCode\": \"25950-001\",\r\n        \"Country\": \"{{$randomCountry}}\"\r\n    }\r\n"
 						}
 					]
 				},
@@ -142,7 +163,13 @@
 					},
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"FirstName\": \"{{$randomFirstName}}\",\r\n    \"LastName\": \"{{$randomLastName}}\",\r\n    \"DateOfBirth\": \"{{$randomDatePast}}\",\r\n    \"Email\": \"{{$randomEmail}}\",\r\n    \"PhoneNumber\": \"{{$randomPhoneNumber}}\",\r\n    \"Address\": \"{{$randomStreetAddress}}\",\r\n    \"City\": \"{{$randomCity}}\",\r\n    \"State\": \"NY\",\r\n    \"ZIPCode\": \"25950-000\",\r\n    \"Country\": \"{{$randomCountry}}\"\r\n}",
@@ -179,7 +206,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"FirstName\": {{$randomFirstName}},\r\n    \"LastName\": {{$randomLastName}},\r\n    \"DateOfBirth\": {{$randomDatePast}},\r\n    \"Email\": {{$randomEmail}},\r\n    \"PhoneNumber\": {{$randomPhoneNumber}},\r\n    \"Address\": {{$randomStreetAddress}},\r\n    \"City\": {{$randomCity}},\r\n    \"State\": \"NY\",\r\n    \"ZIPCode\": \"25950-000\",\r\n    \"Country\": {{$randomCountry}}\r\n}",
+									"raw": "{\r\n    \"FirstName\": Alanis,\r\n    \"LastName\": Pfannerstill,\r\n    \"DateOfBirth\": Tue Mar 07 2023 11:26:03 GMT-0300 (Horário Padrão de Brasília),\r\n    \"Email\": Leanne5@gmail.com,\r\n    \"PhoneNumber\": 458-612-9987,\r\n    \"Address\": 940 Bradtke Burg,\r\n    \"City\": North Ottismouth,\r\n    \"State\": \"NY\",\r\n    \"ZIPCode\": \"25950-000\",\r\n    \"Country\": Sierra Leone\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -187,9 +214,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/onboard/customers",
+									"raw": "https://1df171ae-1ebc-4f2a-a7d4-a211fa09e18c.mock.pstmn.io/onboard/customers",
+									"protocol": "https",
 									"host": [
-										"{{url}}"
+										"1df171ae-1ebc-4f2a-a7d4-a211fa09e18c",
+										"mock",
+										"pstmn",
+										"io"
 									],
 									"path": [
 										"onboard",
@@ -210,7 +241,7 @@
 								},
 								{
 									"key": "Location",
-									"value": "{{url}}/onboard/customers/{{$guid}}",
+									"value": "https://1df171ae-1ebc-4f2a-a7d4-a211fa09e18c.mock.pstmn.io/onboard/customers/e7fb1149-d6a1-49c5-ab07-efab0fd348ab",
 									"description": "",
 									"type": "text"
 								}
@@ -267,14 +298,18 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/onboard/customers/{{$guid}}",
+									"raw": "https://1df171ae-1ebc-4f2a-a7d4-a211fa09e18c.mock.pstmn.io/onboard/customers/7b67bfd1-0bd5-4bb4-9f83-72edc1151602",
+									"protocol": "https",
 									"host": [
-										"{{url}}"
+										"1df171ae-1ebc-4f2a-a7d4-a211fa09e18c",
+										"mock",
+										"pstmn",
+										"io"
 									],
 									"path": [
 										"onboard",
 										"customers",
-										"{{$guid}}"
+										"7b67bfd1-0bd5-4bb4-9f83-72edc1151602"
 									]
 								}
 							},
@@ -331,7 +366,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"CustomerID\": \"{{$guid}}\",\r\n    \"AgencyNumber\":\"{{$randomInt}}\",\r\n    \"AccountType\": \"{{$randomBankAccountName}}\"\r\n}",
+									"raw": "{\r\n    \"CustomerID\": \"b21f97cc-3eb4-4f5f-98f5-f5ac621a127c\",\r\n    \"AgencyNumber\":\"230\",\r\n    \"AccountType\": \"Investment Account\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -339,9 +374,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/onboard/account",
+									"raw": "https://1df171ae-1ebc-4f2a-a7d4-a211fa09e18c.mock.pstmn.io/onboard/account",
+									"protocol": "https",
 									"host": [
-										"{{url}}"
+										"1df171ae-1ebc-4f2a-a7d4-a211fa09e18c",
+										"mock",
+										"pstmn",
+										"io"
 									],
 									"path": [
 										"onboard",
@@ -395,9 +434,13 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/onboard/account/123456",
+									"raw": "https://1df171ae-1ebc-4f2a-a7d4-a211fa09e18c.mock.pstmn.io/onboard/account/123456",
+									"protocol": "https",
 									"host": [
-										"{{url}}"
+										"1df171ae-1ebc-4f2a-a7d4-a211fa09e18c",
+										"mock",
+										"pstmn",
+										"io"
 									],
 									"path": [
 										"onboard",
@@ -477,9 +520,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/onboard/account/123456",
+									"raw": "https://1df171ae-1ebc-4f2a-a7d4-a211fa09e18c.mock.pstmn.io/onboard/account/123456",
+									"protocol": "https",
 									"host": [
-										"{{url}}"
+										"1df171ae-1ebc-4f2a-a7d4-a211fa09e18c",
+										"mock",
+										"pstmn",
+										"io"
 									],
 									"path": [
 										"onboard",

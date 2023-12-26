@@ -14,5 +14,8 @@ files[] = {"id":"1262295-3e2b9ccb-8223-4571-83c4-2e60346fcb4f","path":"Onboard(1
 [config.relations.collections.metaData]
 
 [config.relations.apiDefinition]
+files[] = {"path":"index.yaml","metaData":{}}
 
 [config.relations.apiDefinition.metaData]
+type = openapi:3
+rootFiles[] = index.yaml
