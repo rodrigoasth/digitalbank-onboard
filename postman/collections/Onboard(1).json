@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "67a978db-24b0-46a6-9b5f-82114ae21c46",
+		"_postman_id": "3e2b9ccb-8223-4571-83c4-2e60346fcb4f",
 		"name": "Onboard",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "1262295-67a978db-24b0-46a6-9b5f-82114ae21c46"
+		"_uid": "1262295-3e2b9ccb-8223-4571-83c4-2e60346fcb4f"
 	},
 	"item": [
 		{
@@ -11,7 +11,7 @@
 			"item": [
 				{
 					"name": "List",
-					"id": "afc4a280-8ef4-4483-bc26-72f0c23b9321",
+					"id": "d1f885a6-abea-494a-8c9d-22f42e18a968",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -31,7 +31,7 @@
 					},
 					"response": [
 						{
-							"id": "91dd9dd2-6534-4cde-85f5-dfb08e26cf6c",
+							"id": "db09f56d-be12-4759-be3e-c0220af91c6e",
 							"name": "200 OK",
 							"originalRequest": {
 								"method": "GET",
@@ -66,7 +66,7 @@
 				},
 				{
 					"name": "Specific",
-					"id": "79692113-66c5-4c27-9bd8-6176bfbedc51",
+					"id": "9e720a30-fbc4-4a50-b78d-a94b4d2381e3",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -87,7 +87,7 @@
 					},
 					"response": [
 						{
-							"id": "b843e442-387c-45bf-9f5a-9c392473dc20",
+							"id": "bda6dc48-1749-41d0-8325-1d631fcb15f8",
 							"name": "202",
 							"originalRequest": {
 								"method": "GET",
@@ -127,7 +127,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "6e9ce3a4-4947-431d-9deb-6f134733e4a4",
+								"id": "f434b2b3-c422-46b5-8e1e-1973e253c9bd",
 								"exec": [
 									"var uuid = require('uuid');\r",
 									"pm.globals.set(\"CustomerID\", uuid.v4);"
@@ -136,7 +136,7 @@
 							}
 						}
 					],
-					"id": "90f7ea54-82f9-4797-9d9b-c429d525e1d5",
+					"id": "0a09aa2a-54b8-4b76-acf1-b0ba469fb96f",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -165,7 +165,7 @@
 					},
 					"response": [
 						{
-							"id": "bab9ade9-1276-446b-8569-37c858001be4",
+							"id": "854124f6-3b99-4503-82d2-24dbb5f57743",
 							"name": "201 Created",
 							"originalRequest": {
 								"method": "POST",
@@ -222,7 +222,7 @@
 				},
 				{
 					"name": "Update",
-					"id": "f860e873-7460-49a2-bd26-5efdc833c9f0",
+					"id": "c7777e0e-ebfc-4108-8ca3-5998e0e46395",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -252,7 +252,7 @@
 					},
 					"response": [
 						{
-							"id": "9fc47d80-e908-45a0-8ea0-c48e4273b8fa",
+							"id": "f3e93629-c3d1-4f87-827e-de4c09cc3a8b",
 							"name": "204 Updated",
 							"originalRequest": {
 								"method": "PATCH",
@@ -288,14 +288,230 @@
 					]
 				}
 			],
-			"id": "92fc1288-b2ad-4161-b2f4-eda903d2efb0"
+			"id": "a2ff34cc-f80f-49b4-bc1e-e49de98bcf8a"
+		},
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "Create",
+					"id": "4555fbf5-244f-41ab-b092-114bfcdd4c58",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"CustomerID\": \"{{$guid}}\",\r\n    \"AgencyNumber\":\"{{$randomInt}}\",\r\n    \"AccountType\": \"{{$randomBankAccountName}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/onboard/account",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"onboard",
+								"account"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "4948de20-c729-46f8-afde-02b56f69d82d",
+							"name": "201 Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"CustomerID\": \"{{$guid}}\",\r\n    \"AgencyNumber\":\"{{$randomInt}}\",\r\n    \"AccountType\": \"{{$randomBankAccountName}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/onboard/account",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"onboard",
+										"account"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"name": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"CustomerID\": \"{{$body 'CustomerID'}}\",\n    \"AccountType\": \"{{$body 'AccountType'}}\",\n    \"CurrentBalance\": 0,\n    \"DateOpened\": \"{{$randomDateRecent}}\",\n    \"AccountStatus\": \"Active\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Specific",
+					"id": "56bc6a88-11d4-4013-b0e3-d0b28bb9eb20",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/onboard/account/123456",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"onboard",
+								"account",
+								"123456"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "56690294-60cd-44d7-80c2-4f7e9866de27",
+							"name": "Specific",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/onboard/account/123456",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"onboard",
+										"account",
+										"123456"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"name": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"AccountNumber\": \"123456\",\n    \"AccountType\": \"Savings\",\n    \"CurrentBalance\": {{$randomPrice}},\n    \"DateOpened\": \"2021-01-01\",\n    \"DateClosed\": null,\n    \"AccountStatus\": \"Active\"\n}\n"
+						}
+					]
+				},
+				{
+					"name": "Update",
+					"id": "4d8207cd-a925-4e99-a874-a8222a39c8da",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"AccountStatus\": \"Closed\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/onboard/account/123456",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"onboard",
+								"account",
+								"123456"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "6846425a-b6cb-4682-8327-75fa3507a584",
+							"name": "Close Account",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"AccountStatus\": \"Closed\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/onboard/account/123456",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"onboard",
+										"account",
+										"123456"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"name": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"AccountNumber\": \"123456\",\n    \"AccountType\": \"Savings\",\n    \"CurrentBalance\": 0,\n    \"DateOpened\": \"2021-01-01\",\n    \"DateClosed\": \"2023-01-01\",\n    \"AccountStatus\": \"Closed\"\n}"
+						}
+					]
+				}
+			],
+			"id": "ad6a3586-3086-488e-94a0-0f2d998333a7"
 		}
 	],
 	"event": [
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "2f0a25f4-ee8f-4fa5-b501-3489087c1f22",
+				"id": "51d326f9-ed9c-4a09-add2-6094f4bd9975",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -305,7 +521,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "35f9d609-488a-4ef8-b3a9-8d625d204888",
+				"id": "6bc38c4b-7433-4101-a491-dd3a2074cc44",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -315,7 +531,7 @@
 	],
 	"variable": [
 		{
-			"id": "78914e49-5501-45f7-aef4-4081e2170b96",
+			"id": "26428591-dcc7-412e-95cc-b40b030526a8",
 			"key": "url",
 			"value": "https://1df171ae-1ebc-4f2a-a7d4-a211fa09e18c.mock.pstmn.io",
 			"type": "string"
