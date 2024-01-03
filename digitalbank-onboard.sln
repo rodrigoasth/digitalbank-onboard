@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "digitalbank-onboard-api", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{E14A57C1-AEC9-4AC4-A34D-DB96D54064D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "digital.bank.onboard.api.tests", "test\digital.bank.onboard.api.tests\digital.bank.onboard.api.tests.csproj", "{0EA03239-BAB5-46F7-9274-AAB2A0FAEF45}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "digital.bank.onboard.api.tests", "test\DigitalBank.Onboard.Api.Tests\DigitalBank.Onboard.Api.Tests.csproj", "{0EA03239-BAB5-46F7-9274-AAB2A0FAEF45}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

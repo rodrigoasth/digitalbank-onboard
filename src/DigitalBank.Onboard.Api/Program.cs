@@ -1,4 +1,5 @@
 using Carter;
+using DigitalBank.Onboard.Api.Infra.Respository;
 using DigitalBank.Onboard.Database;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,8 @@ builder.Services.AddMediatR(config=>config.RegisterServicesFromAssembly(typeof(P
 builder.Services.AddCarter();
 
 builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
+
+builder.Services.AddScoped<CustomerRepository, CustomerRepository>();
 
 var app = builder.Build();
 

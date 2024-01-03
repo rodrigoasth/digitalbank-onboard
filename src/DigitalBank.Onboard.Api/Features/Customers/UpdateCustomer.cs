@@ -1,11 +1,13 @@
 using System.Runtime.CompilerServices;
 using Carter;
 using DigitalBank.Onboard.Api.Contracts;
+using DigitalBank.Onboard.Api.Infra.Respository;
 using DigitalBank.Onboard.Api.Shared;
 using DigitalBank.Onboard.Database;
 using FluentValidation;
 using Mapster;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using static DigitalBank.Onboard.Api.Features.Customers.UpdateCustomer;
 
 namespace DigitalBank.Onboard.Api.Features.Customers
@@ -45,12 +47,12 @@ namespace DigitalBank.Onboard.Api.Features.Customers
         
         internal sealed class Handler : IRequestHandler<UpdateCustomerCommand, Result<Guid>>
         {
-            private readonly ApplicationDbContext _dbContext;
+            private readonly ICustomerRepository _customerRepository;
             private readonly IValidator<UpdateCustomerCommand> _validator;
         
-            public Handler(ApplicationDbContext dbContext, IValidator<UpdateCustomerCommand> validator)
+            public Handler(ICustomerRepository customerRepository, IValidator<UpdateCustomerCommand> validator)
             {
-                _dbContext = dbContext;
+                _customerRepository = customerRepository;
                 _validator = validator;
             }
         
@@ -58,17 +60,14 @@ namespace DigitalBank.Onboard.Api.Features.Customers
             {
                 var validationResult = await _validator.ValidateAsync(command, cancellationToken);
                 if (!validationResult.IsValid)
-                {
                     return Result.Failure<Guid>(new Error("Customer updated succesfully", validationResult.ToString()));
-                }
-                
+
                 var incoming = command.Adapt<Customer>();
 
-                if (await _dbContext.Customers.FindAsync(command.CustomerId) is Customer found)
-                {
-                    _dbContext.Entry(found).CurrentValues.SetValues(incoming);
-                    await _dbContext.SaveChangesAsync();
-                }   
+                var customer = await _customerRepository.GetAsync(incoming.CustomerId);
+
+                if (customer != null)
+                    await _customerRepository.UpdateAsync(incoming);
 
                 return incoming.CustomerId;     
             }
