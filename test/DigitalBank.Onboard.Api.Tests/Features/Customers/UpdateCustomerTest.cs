@@ -67,5 +67,59 @@ namespace DigitalBank.Onboard.Api.Tests.Features.Customers
             result.IsSuccess.Should().BeFalse();
             result.Error.Should().NotBeNull();
         }
+
+        [Fact]
+        public void Validator_ValidatesRequiredFields()
+        {
+            // Arrange
+            var validator = new UpdateCustomer.Validator();
+            var command = new UpdateCustomerCommand
+            {
+                CustomerId = Guid.NewGuid(),
+                FirstName = "John",
+                LastName = "Doe",
+                DateOfBirth = new DateTime(1990, 1, 1),
+                Email = "john.doe@example.com",
+                PhoneNumber = "12345678901",
+                Address = "123 Main St",
+                City = "New York",
+                State = "NY",
+                ZIPCode = "12345",
+                Country = "USA"
+            };
+
+            // Act
+            var result = validator.Validate(command);
+
+            // Assert
+            result.IsValid.Should().BeTrue();
+        }
+
+        [Fact]
+        public void Validator_InvalidatesMissingFirstName()
+        {
+            // Arrange
+            var validator = new UpdateCustomer.Validator();
+            var command = new UpdateCustomerCommand
+            {
+                CustomerId = Guid.NewGuid(),
+                LastName = "Doe",
+                DateOfBirth = new DateTime(1990, 1, 1),
+                Email = "john.doe@example.com",
+                PhoneNumber = "12345678901",
+                Address = "123 Main St",
+                City = "New York",
+                State = "NY",
+                ZIPCode = "12345",
+                Country = "USA"
+            };
+
+            // Act
+            var result = validator.Validate(command);
+
+            // Assert
+            result.IsValid.Should().BeFalse();
+            result.Errors.Should().ContainSingle(e => e.PropertyName == "FirstName" && e.ErrorMessage == "'First Name' must not be empty.");
+        }
     }
 }
