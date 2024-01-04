@@ -69,6 +69,40 @@ namespace DigitalBank.Onboard.Api.Tests.Features.Customers
         }
 
         [Fact]
+        public async Task Handle_CustomerUnder18YearsOld_ReturnsFailureResult()
+        {
+            // Arrange
+            var repositoryMock = new Mock<ICustomerRepository>();
+            var validatorMock = new Mock<IValidator<UpdateCustomerCommand>>();
+            var command = new UpdateCustomerCommand
+            {
+                CustomerId = Guid.NewGuid(),
+                FirstName = "John",
+                LastName = "Doe",
+                DateOfBirth = new DateTime(2010, 1, 1),
+                Email = "john.doe@example.com",
+                PhoneNumber = "12345678901",
+                Address = "123 Main St",
+                City = "New York",
+                State = "NY",
+                ZIPCode = "12345",
+                Country = "USA"
+            };
+            
+            validatorMock.Setup(v => v.ValidateAsync(command, It.IsAny<CancellationToken>()))
+                .ReturnsAsync(new FluentValidation.Results.ValidationResult());
+
+            var handler = new UpdateCustomer.Handler(repositoryMock.Object, validatorMock.Object);
+
+            // Act
+            var result = await handler.Handle(command, CancellationToken.None);
+
+            // Assert
+            result.IsSuccess.Should().BeFalse();
+            result.Error.Should().NotBeNull();
+        }
+
+        [Fact]
         public void Validator_ValidatesRequiredFields()
         {
             // Arrange

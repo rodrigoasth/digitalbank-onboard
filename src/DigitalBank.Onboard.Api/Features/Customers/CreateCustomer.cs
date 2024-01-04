@@ -28,16 +28,14 @@ namespace DigitalBank.Onboard.Api.Features.Customers
         {
             public Validator()
             {
-                RuleFor(x => x.FirstName).NotEmpty();
-                RuleFor(x => x.LastName).NotEmpty();
-                RuleFor(x => x.DateOfBirth).NotEmpty();
+                RuleFor(x => x.FirstName).NotEmpty().MinimumLength(3);
+                RuleFor(x => x.LastName).NotEmpty().MinimumLength(3);                
+                RuleFor(x => x.DateOfBirth).NotEmpty().LessThan(DateTime.Now);
                 RuleFor(x => x.Email).NotEmpty().EmailAddress();
                 RuleFor(x => x.PhoneNumber).NotEmpty().Matches(@"^\d{11}$");
-                RuleFor(x => x.Address).NotEmpty();
-                RuleFor(x => x.City).NotEmpty();
-                RuleFor(x => x.State).NotEmpty();
-                RuleFor(x => x.ZIPCode).NotEmpty();
-                RuleFor(x => x.Country).NotEmpty();
+                RuleFor(x => x.City).NotEmpty().MinimumLength(3);
+                RuleFor(x => x.State).NotEmpty().MaximumLength(2);
+                RuleFor(x => x.Country).NotEmpty().MinimumLength(2); 
             }
         }
 
@@ -74,6 +72,10 @@ namespace DigitalBank.Onboard.Api.Features.Customers
                     ZIPCode = request.ZIPCode,
                     Country = request.Country
                 };
+
+                if(customer.RulesIsBroken())
+                    return Result.Failure<Guid>(new Error("Create customer check rules", customer.GetBrokenRules())); 
+
 
                 _dbContext.Customers.Add(customer);
 

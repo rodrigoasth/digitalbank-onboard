@@ -10,9 +10,9 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using static DigitalBank.Onboard.Api.Features.Customers.UpdateCustomer;
 
-namespace DigitalBank.Onboard.Api.Features.Customers
+namespace DigitalBank.Onboard.Api.Features.Customers 
 {
-    public static class UpdateCustomer
+    public static class UpdateCustomer 
     {
         public class UpdateCustomerCommand : IRequest<Result<Guid>>
         {
@@ -34,14 +34,14 @@ namespace DigitalBank.Onboard.Api.Features.Customers
             public Validator()
             {
                 RuleFor(x => x.CustomerId).NotEmpty();
-                RuleFor(x => x.FirstName).NotEmpty();
-                RuleFor(x => x.LastName).NotEmpty();
-                RuleFor(x => x.DateOfBirth).NotEmpty();
+                RuleFor(x => x.FirstName).NotEmpty().MinimumLength(3);
+                RuleFor(x => x.LastName).NotEmpty().MinimumLength(3);                
+                RuleFor(x => x.DateOfBirth).NotEmpty().LessThan(DateTime.Now);
                 RuleFor(x => x.Email).NotEmpty().EmailAddress();
                 RuleFor(x => x.PhoneNumber).NotEmpty().Matches(@"^\d{11}$");
-                RuleFor(x => x.City).NotEmpty();
-                RuleFor(x => x.State).NotEmpty();
-                RuleFor(x => x.Country).NotEmpty();                
+                RuleFor(x => x.City).NotEmpty().MinimumLength(3);
+                RuleFor(x => x.State).NotEmpty().MaximumLength(2);
+                RuleFor(x => x.Country).NotEmpty().MinimumLength(2);                
             }
         }
         
@@ -60,9 +60,13 @@ namespace DigitalBank.Onboard.Api.Features.Customers
             {
                 var validationResult = await _validator.ValidateAsync(command, cancellationToken);
                 if (!validationResult.IsValid)
-                    return Result.Failure<Guid>(new Error("Customer updated succesfully", validationResult.ToString()));
+                    return Result.Failure<Guid>(new Error("Customer updated succesfully.", validationResult.ToString()));
 
                 var incoming = command.Adapt<Customer>();
+                incoming.Update();
+
+                if(incoming.RulesIsBroken())
+                    return Result.Failure<Guid>(new Error("Customer updated failed.", incoming.GetBrokenRules()));
 
                 var customer = await _customerRepository.GetAsync(incoming.CustomerId);
 
