@@ -9,9 +9,9 @@ using static DigitalBank.Onboard.Api.Features.Customers.UpdateCustomer;
 
 namespace DigitalBank.Onboard.Api.Tests.Features.Customers
 {
-    public class UpdateCustomerTests 
+    public class UpdateCustomerUnitTests 
     {
-               
+        [Trait("Category","Unit")]               
         [Fact]
         public async Task Handle_ValidCommand_ReturnsSuccessResult()
         {

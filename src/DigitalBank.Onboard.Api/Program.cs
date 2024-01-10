@@ -29,7 +29,7 @@ builder.Services.AddCarter();
 
 builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 
-builder.Services.AddScoped<CustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 
 var app = builder.Build();
 
@@ -45,3 +45,5 @@ app.MapCarter();
 app.UseHttpsRedirection();
 
 app.Run();
+
+public partial class Program{}

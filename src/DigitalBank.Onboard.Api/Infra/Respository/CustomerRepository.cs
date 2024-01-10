@@ -11,7 +11,7 @@ namespace DigitalBank.Onboard.Api.Infra.Respository
         Task<Customer?> GetAsync(Guid customerId);
     }
     
-    public class CustomerRepository
+    public class CustomerRepository : ICustomerRepository
     {
         private readonly ApplicationDbContext _dbContext;
 

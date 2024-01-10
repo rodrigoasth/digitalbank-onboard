@@ -1,13 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using DigitalBank.Onboard.Api.Features.Customers;
 using FluentAssertions;
 
 namespace DigitalBank.Onboard.Api.Tests.Features.Customers
 {
-    public class CustomerTest
+    public class CustomerUnitTest
     {
         [Fact]
         public void Customer_WhenDateOfBirthIsLessThan18YearsOld_ReturnsBrokenRules()
