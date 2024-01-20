@@ -1,5 +1,6 @@
 using Carter;
 using DigitalBank.Onboard.Api.Contracts;
+using DigitalBank.Onboard.Api.Infra.Respository;
 using DigitalBank.Onboard.Api.Shared;
 using DigitalBank.Onboard.Database;
 using FluentValidation;
@@ -41,13 +42,14 @@ namespace DigitalBank.Onboard.Api.Features.Customers
 
         internal sealed class Handler : IRequestHandler<CreateCustomerCommand, Result<Guid>>
         {
-            private readonly ApplicationDbContext _dbContext;
+            private readonly ICustomerRepository _customerRepository;
+
             private readonly IValidator<CreateCustomerCommand> _validator;
 
-            public Handler(ApplicationDbContext dbContext, IValidator<CreateCustomerCommand> validator)
+            public Handler(ICustomerRepository customerRepository, IValidator<CreateCustomerCommand> validator)
             {
-                _dbContext = dbContext;
                 _validator = validator;
+                _customerRepository = customerRepository;
             }
 
             public async Task<Result<Guid>> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
@@ -76,10 +78,7 @@ namespace DigitalBank.Onboard.Api.Features.Customers
                 if(customer.RulesIsBroken())
                     return Result.Failure<Guid>(new Error("Create customer check rules", customer.GetBrokenRules())); 
 
-
-                _dbContext.Customers.Add(customer);
-
-                await _dbContext.SaveChangesAsync(cancellationToken);
+                await _customerRepository.AddAsync(customer);
 
                 return customer.CustomerId;
             }

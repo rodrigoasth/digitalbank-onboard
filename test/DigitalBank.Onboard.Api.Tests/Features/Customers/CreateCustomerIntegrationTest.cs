@@ -1,28 +1,31 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using DigitalBank.Onboard.Api.Tests.Shared;
 using Newtonsoft.Json;
-using static DigitalBank.Onboard.Api.Features.Customers.UpdateCustomer;
+using static DigitalBank.Onboard.Api.Features.Customers.CreateCustomer;
 
 namespace DigitalBank.Onboard.Api.Tests.Features.Customers
 {
-    public class UpdateCustomerIntegrationTest : IClassFixture<IntegrationTestFactory>
+    public class CreateCustomerIntegrationTest : IClassFixture<IntegrationTestFactory>
     {
         private readonly IntegrationTestFactory _factory;
 
-        public UpdateCustomerIntegrationTest(IntegrationTestFactory factory)
+        public CreateCustomerIntegrationTest(IntegrationTestFactory factory)
         {
             this._factory = factory;
         }
 
         [Fact]
-        public async Task UpdateCustomer_WithValidData_ReturnsSuccess()
+        public async Task CreateCustomer_WithValidData_ReturnsSuccess()
         {
             // Arrange
             var client = _factory.CreateClient();
-            var command = new UpdateCustomerCommand
+            var command = new CreateCustomerCommand
             {    
-                CustomerId = Guid.NewGuid(),            
                 FirstName = "Teste",
                 Email = "rodrigoasth@gmail.com",
                 LastName = "Teste",
@@ -38,21 +41,21 @@ namespace DigitalBank.Onboard.Api.Tests.Features.Customers
             var body = new StringContent(JsonConvert.SerializeObject(command), Encoding.UTF8, "application/json");
 
             // Act
-            var response = await client.PutAsync($"api/v1/customers/{command.CustomerId}", body);
+            var response = await client.PostAsync($"api/v1/customers", body);
 
-            // Assert that return 204 hpttp status code
-            Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
+            // Assert that return 201 hpttp status code
+            Assert.Equal(HttpStatusCode.Created, response.StatusCode);
+            Assert.NotNull(response.Headers.Location);
             
         }
 
         [Fact]
-        public async Task UpdateCustomer_WithInvalidEmail_ReturnsBadRequest()
+        public async Task CreateCustomer_WithInvalidEmail_ReturnsBadRequest()
         {
             // Arrange
             var client = _factory.CreateClient();
-            var command = new UpdateCustomerCommand
+            var command = new CreateCustomerCommand
             {    
-                CustomerId = Guid.NewGuid(),            
                 FirstName = "Teste",
                 Email = "",
                 LastName = "Teste",
@@ -68,13 +71,11 @@ namespace DigitalBank.Onboard.Api.Tests.Features.Customers
             var body = new StringContent(JsonConvert.SerializeObject(command), Encoding.UTF8, "application/json");
 
             // Act
-            var response = await client.PutAsync($"api/v1/customers/{command.CustomerId}", body);
+            var response = await client.PostAsync($"api/v1/customers", body);
 
             // Assert that return 400 hpttp status code
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
 
         }
-
-
     }
 }
