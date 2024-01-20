@@ -21,11 +21,11 @@ namespace DigitalBank.Onboard.Api.Infra.Respository
         }
 
         public async Task<Guid> AddAsync(Customer customer)
-        {
-            _dbContext.Customers.Add(customer);
+        {            
+            await _dbContext.Customers.AddAsync(customer);
             await _dbContext.SaveChangesAsync();
 
-            return customer.CustomerId;
+            return customer.CustomerId;            
         }
 
         public async Task UpdateAsync(Customer customer)
@@ -36,7 +36,9 @@ namespace DigitalBank.Onboard.Api.Infra.Respository
 
         public async Task<Customer?> GetAsync(Guid customerId)
         {
-            return await _dbContext.Customers.FirstOrDefaultAsync(c => c.CustomerId == customerId);
+            var customer = await _dbContext.Customers.FirstOrDefaultAsync(c => c.CustomerId == customerId);
+
+            return customer;
         }        
     }
 }

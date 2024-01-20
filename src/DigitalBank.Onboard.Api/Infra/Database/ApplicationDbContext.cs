@@ -1,3 +1,4 @@
+using DigitalBank.Onboard.Api.Features.Accounts;
 using DigitalBank.Onboard.Api.Features.Customers;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,5 +16,6 @@ namespace DigitalBank.Onboard.Database
         }
 
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Account> Accounts { get; set; }
     }
 }
