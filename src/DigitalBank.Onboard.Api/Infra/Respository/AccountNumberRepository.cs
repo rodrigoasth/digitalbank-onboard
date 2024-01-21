@@ -11,7 +11,7 @@ namespace DigitalBank.Onboard.Api.Infra.Respository
         void CreateAccountNumberPool(int agency);
     }   
 
-    public class AccountNumberRepository
+    public class AccountNumberRepository : IAccountNumberRepository
     {        
         public int GetNextAccountNumberAvailable(int agency)
         {

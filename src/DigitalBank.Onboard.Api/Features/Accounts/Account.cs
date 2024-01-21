@@ -6,6 +6,7 @@ namespace DigitalBank.Onboard.Api.Features.Accounts
 {
     public class Account : Entity, IAggregateRoot
     {
+        public const string AccountNumberLessThanSixDigitsMessage = "Account number must be 6 digits";
         public Guid AccountId { get; set; }
         public int Agency { get; set; }
         public int AccountNumber { get; set; }
@@ -14,9 +15,10 @@ namespace DigitalBank.Onboard.Api.Features.Accounts
 
         public Account(int agency, int accountNumber, Guid customerId)
         {
-            if(accountNumber != 6)
+            int digitsAccountNumber = (int)Math.Floor(Math.Log10(accountNumber) + 1);
+            if(digitsAccountNumber != 6)
             {
-                NotificationContext.AddNotification("Account number must be 6 digits");
+                NotificationContext.AddNotification(AccountNumberLessThanSixDigitsMessage);
                 return;
             }
 

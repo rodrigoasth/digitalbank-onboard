@@ -1,12 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DigitalBank.Onboard.Api.Infra;
+using Carter;
+using DigitalBank.Onboard.Api.Contracts;
 using DigitalBank.Onboard.Api.Infra.Respository;
 using DigitalBank.Onboard.Api.Shared;
 using DigitalBank.Onboard.Database;
 using FluentValidation;
+using Mapster;
 using MediatR;
 
 namespace DigitalBank.Onboard.Api.Features.Accounts
@@ -32,12 +30,12 @@ namespace DigitalBank.Onboard.Api.Features.Accounts
         {
             private readonly IValidator<CreateAccountCommand> _validator;
             private readonly IAccountNumberRepository _accountNumberRepository;
-            private readonly AccountRepository _accountRepository;
+            private readonly IAccountRepository _accountRepository;
 
             public Handler(
                         IValidator<CreateAccountCommand> validator,
                         IAccountNumberRepository accountNumberRepository,
-                        AccountRepository accountRepository)
+                        IAccountRepository accountRepository)
             {
                 _validator = validator;
                 _accountNumberRepository = accountNumberRepository;
@@ -65,6 +63,36 @@ namespace DigitalBank.Onboard.Api.Features.Accounts
                 return Result.Success(account.AccountId);
         
             }
+        }        
+    }
+
+    public class CreateAccountEndpoint : ICarterModule
+    {
+        public void AddRoutes(IEndpointRouteBuilder app)
+        {
+            app.MapPost("/api/v1/accounts", async (
+                                                AccountRequest request, 
+                                                ISender sender)=>{
+                try
+                {
+                    var command = request.Adapt<CreateAccount.CreateAccountCommand>();
+                    var result = await sender.Send(command);
+    
+                    if (result.IsFailure)
+                    {
+                        return Results.BadRequest(result.Error);
+                    }
+    
+                    var accountId = result.Value;
+
+                    return Results.Created($"/api/v1/customers/{accountId}", accountId);
+    
+                }
+                catch (Exception ex)
+                {
+                    return Results.BadRequest(ex.Message);
+                }
+            });
         }
     }
 }

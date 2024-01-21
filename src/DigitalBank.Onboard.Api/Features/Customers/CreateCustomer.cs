@@ -89,7 +89,9 @@ namespace DigitalBank.Onboard.Api.Features.Customers
     {
         public void AddRoutes(IEndpointRouteBuilder app)
         {
-            app.MapPost("/api/v1/customers", async (CustomerRequest request, ISender sender)=>{
+            app.MapPost("/api/v1/customers", async (
+                                                CustomerRequest request, 
+                                                ISender sender)=>{
                 try
                 {
                     var command = request.Adapt<CreateCustomer.CreateCustomerCommand>();

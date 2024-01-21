@@ -1,4 +1,5 @@
 using Carter;
+using DigitalBank.Onboard.Api.Infra;
 using DigitalBank.Onboard.Api.Infra.Respository;
 using DigitalBank.Onboard.Database;
 using FluentValidation;
@@ -29,6 +30,8 @@ builder.Services.AddCarter();
 
 builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 
+builder.Services.AddScoped<IAccountNumberRepository, AccountNumberRepository>();
+builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 
 var app = builder.Build();
