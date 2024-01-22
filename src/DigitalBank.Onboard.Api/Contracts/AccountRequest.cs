@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DigitalBank.Onboard.Api.Contracts
 {
     public class AccountRequest
     {
-        
+        public Guid CustomerId { get; set; }
+        public int Agency { get; set; }
     }
 }
