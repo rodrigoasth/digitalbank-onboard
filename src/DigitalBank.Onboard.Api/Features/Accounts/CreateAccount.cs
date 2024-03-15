@@ -31,6 +31,7 @@ namespace DigitalBank.Onboard.Api.Features.Accounts
             private readonly IValidator<CreateAccountCommand> _validator;
             private readonly IAccountNumberRepository _accountNumberRepository;
             private readonly IAccountRepository _accountRepository;
+            private readonly object _bus;
 
             public Handler(
                         IValidator<CreateAccountCommand> validator,
@@ -58,7 +59,11 @@ namespace DigitalBank.Onboard.Api.Features.Accounts
                 if(account.RulesIsBroken())
                     return Result.Failure<Guid>(new Error("Create account check rules", account.GetBrokenRules()));
 
-                await _accountRepository.CreateAccountAsync(account);                
+                await _accountRepository.CreateAccountAsync(account);  
+
+                //publish a message to service bus queue
+                await _bus.PublishAsync(new AccountCreatedEvent(account.AccountId));
+
 
                 return Result.Success(account.AccountId);
         

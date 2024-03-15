@@ -21,7 +21,6 @@
     <Folder Include="Features/" />
     <Folder Include="Infra/Extension/" />
     <Folder Include="Infra/Migration/" />
-    <Folder Include="Shared/" />
   </ItemGroup>
 
 </Project>
